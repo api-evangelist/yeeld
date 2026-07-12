@@ -14,8 +14,12 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/yeeld/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/yeeld-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/theyeeld
+  - url: https://theyeeld.com/feed/
+    type: Blog
 apis:
   - aid: yeeld:yeeld
     name: Yeeld
