@@ -4,9 +4,21 @@ description: >-
   Move faster with payment experts offering advisory and development services, along
   with a Surcharging API to recover costs and ensure compliance.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/yeeld.png
 tags: []
 created: '2025-02-21'
 modified: '2026-03-16'
