@@ -1,0 +1,72 @@
+specification: API Commons Authentication
+specificationVersion: '0.1'
+provider: Yeeld
+providerId: yeeld
+generated: '2026-08-28'
+method: searched
+source: >-
+  https://docs.theyeeld.com/integrations,
+  https://docs.theyeeld.com/integrations/merchant,
+  https://docs.theyeeld.com/integrations/platforms-and-marketplaces
+description: >-
+  Authentication profile for the Yeeld Surcharging API, read from Yeeld's public
+  integration guides. Yeeld publishes no OpenAPI, so no securityScheme could be derived;
+  everything below is stated in prose on the pages cited and nothing is inferred.
+  The full parameter-level reference is gated — theyeeld.com/products/surcharging-api
+  answers "Is there a sandbox or API docs? Yes. Contact us to get access."
+schemes:
+  - id: yeeld-api-key
+    type: apiKey
+    in: unknown
+    name: unknown
+    description: >-
+      Yeeld issues an API key per account. The merchant guide says "Yeeld applies the
+      surcharging rules associated with your primary API key", so the key is both the
+      credential and the tenant selector in the single-merchant model. The transport
+      (header name vs. bearer scheme) is not published.
+    evidence:
+      - url: https://docs.theyeeld.com/integrations
+        quote: >-
+          Yeeld Configuration: You do not need to pass an account header. Yeeld applies
+          the surcharging rules associated with your primary API key.
+        status: 200
+    published_scheme_details: false
+  - id: yeeld-account-header
+    type: apiKey
+    in: header
+    name: Yeeld-Account
+    description: >-
+      Tenant-scoping header, REQUIRED for the Platforms & Marketplaces model. A platform
+      calling on behalf of a sub-merchant passes that sub-merchant's Yeeld account ID so
+      the surcharge is calculated against that merchant's location and settings. Not an
+      authentication credential on its own — it rides alongside the platform's API key.
+    evidence:
+      - url: https://docs.theyeeld.com/integrations
+        quote: >-
+          You must provide the Yeeld-Account header in every API call to ensure the
+          surcharge is calculated based on that specific sub-merchant's location and settings.
+        status: 200
+      - url: https://docs.theyeeld.com/integrations/platforms-and-marketplaces
+        quote: >-
+          you pass the sub-merchant's Yeeld account ID in the request header so Yeeld
+          applies the correct rules for that merchant
+        status: 200
+oauth2: false
+openid_connect: false
+mutual_tls: false
+notes:
+  - >-
+    Adjacent-but-not-Yeeld: the same guides tell you to hold "a standard Stripe Secret Key"
+    for your PSP. That is a Stripe credential used against Stripe, not a Yeeld auth scheme,
+    and is recorded here only so a reader does not confuse the two key types.
+  - >-
+    No /.well-known/oauth-authorization-server, /.well-known/oauth-protected-resource or
+    /.well-known/openid-configuration is served on any Yeeld host (all 404 on 2026-08-28,
+    see well-known/yeeld-well-known.yml), which is consistent with a plain API-key model.
+gaps:
+  - Header or scheme name that carries the API key is not published.
+  - Key prefix / test-vs-live key distinction is not published.
+  - No key rotation, expiry, or scoping policy is published.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

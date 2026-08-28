@@ -1,0 +1,156 @@
+specification: API Commons Conventions
+specificationVersion: '0.1'
+provider: Yeeld
+providerId: yeeld
+generated: '2026-08-28'
+method: searched
+source: >-
+  https://docs.theyeeld.com/getting-started/overview,
+  https://docs.theyeeld.com/integrations,
+  https://docs.theyeeld.com/integrations/merchant,
+  https://docs.theyeeld.com/integrations/platforms-and-marketplaces,
+  https://docs.theyeeld.com/compliance/overview,
+  plus live unauthenticated probes of https://api.theyeeld.com on 2026-08-28.
+description: >-
+  Cross-cutting runtime semantics for the Yeeld Surcharging API. Yeeld publishes no
+  OpenAPI and no endpoint-level reference, so every field below is either quoted from the
+  public integration guides or observed on a live probe. Fields the provider does not
+  publish are recorded as undocumented rather than filled in.
+base_url:
+  url: https://api.theyeeld.com
+  method: probed
+  status: 404
+  note: >-
+    The docs never state a base URL. api.theyeeld.com resolves to Yeeld's own AWS load
+    balancer (prod-shikaserviceloadbal-*.us-east-2.elb.amazonaws.com) and answers every
+    unauthenticated path with a Fastify JSON 404 envelope, which establishes it as a live
+    first-party API host. Route names could not be discovered and were NOT guessed.
+auth:
+  style: api-key
+  tenant_header: Yeeld-Account
+  detail: See authentication/yeeld-authentication.yml.
+error_envelope:
+  format: vendor-json
+  rfc9457: false
+  method: probed
+  observed_shape:
+    message: string
+    error: string
+    statusCode: integer
+  example_status: 404
+  note: >-
+    Observed on unauthenticated requests to api.theyeeld.com — e.g.
+    {"message":"Route GET:/ not found","error":"Not Found","statusCode":404}. This is the
+    Fastify framework default envelope; whether authenticated business errors use the same
+    shape is not published. No error/decline-code reference is published, so no
+    errors/ catalog was authored.
+pagination:
+  documented: false
+  note: >-
+    No list endpoints are described in public docs. The documented surface is a
+    per-transaction surcharge calculation, so pagination may genuinely not apply.
+rate_limit_signaling:
+  documented: false
+  note: See rate-limits/yeeld-rate-limits.yml — no limits and no response headers published.
+versioning:
+  documented: false
+  scheme: unknown
+  note: >-
+    No version segment is documented and no /v1 route answers anonymously. Docs pages
+    carry an "Updated: April 2026" stamp and an owner (Engineering / Compliance /
+    Operations / Product) instead of an API version.
+request_id_tracing:
+  documented: false
+field_expansion:
+  documented: false
+metadata:
+  documented: false
+idempotency:
+  supported: undocumented
+  header: null
+  note: >-
+    No idempotency key, header, or replay policy is published. The docs do instruct callers
+    to RE-CALL the API when a shopper switches payment method ("You must re-call the Yeeld
+    API to determine if the surcharge amount has changed"), which implies recalculation is
+    safe to repeat, but Yeeld does not state that anywhere as an idempotency guarantee and
+    it is not recorded as one here. No Idempotency pointer is emitted in apis.yml.
+dry_run_mode:
+  supported: undocumented
+  note: >-
+    A sandbox exists but is access-gated (see sandbox/yeeld-sandbox.yml). No dry-run or
+    simulate flag is documented on the live API.
+reversibility:
+  grade: na
+  state: na
+  rationale: >-
+    Yeeld's own overview states plainly: "Yeeld does not process payments, store card data,
+    or provide legal advice. It is a real-time rules engine, not a payment processor or
+    legal service." The publicly documented API surface is a surcharge CALCULATION call —
+    the caller sends an amount plus payment-method details and receives a surcharge amount.
+    It moves no money and creates no consumer-visible artifact, so there is nothing for an
+    agent to take back and reversibility does not apply to the documented surface.
+  reversal_operations: []
+  windows: []
+  caveats:
+    - >-
+      Yeeld does record transactions: "the surcharging data is logged within the Yeeld
+      Platform for reconciliation, compliance auditing, and reporting". No API operation to
+      amend, void or delete a logged surcharge is documented, so if such a write surface
+      exists it is undocumented rather than absent.
+    - >-
+      Refunds are named as a configuration item in the Stripe App onboarding ("refund
+      handling") and as advisory scope ("Refund and tax guidance"), but no refund or
+      reversal API operation and NO time window is published anywhere. No window is asserted
+      here; inventing one on a payments provider is the one error in this pipeline that
+      could cost a user real money.
+  evidence:
+    - url: https://docs.theyeeld.com/getting-started/overview
+      status: 200
+    - url: https://docs.theyeeld.com/integrations/merchant
+      status: 200
+integration_models:
+  - id: merchant
+    label: Merchant (merchant of record)
+    account_header_required: false
+    docs: https://docs.theyeeld.com/integrations/merchant
+  - id: platforms-and-marketplaces
+    label: Platforms & Marketplaces (sub-merchant is MoR)
+    account_header_required: true
+    account_header: Yeeld-Account
+    docs: https://docs.theyeeld.com/integrations/platforms-and-marketplaces
+documented_flow:
+  - step: 1
+    name: Initialize the payment and calculate surcharge
+    detail: >-
+      Server creates a session/transaction with the PSP (Stripe, Adyen, Checkout.com), then
+      calls the Yeeld API with the base transaction amount and payment-method details (card
+      brand/type). Yeeld returns the calculated surcharge amount.
+  - step: 2
+    name: Update the transaction total
+    detail: >-
+      Update the PSP transaction to Original Price + Surcharge Amount so the authorized
+      amount matches the displayed total and no amount-mismatch error occurs.
+  - step: 3
+    name: Display the surcharge to the user
+    detail: >-
+      Return the surcharge amount and PSP credentials to the client; show the surcharge as a
+      distinct line item before the final payment button.
+  - step: 4
+    name: Confirm the payment
+    detail: >-
+      PSP processes the full amount; Yeeld logs the surcharging data for reconciliation,
+      compliance auditing, and reporting.
+  - step: recalculate
+    name: Payment-method change
+    detail: >-
+      If the shopper switches payment method, re-call the Yeeld API and re-sync the PSP
+      transaction total.
+cross_references:
+  authentication: authentication/yeeld-authentication.yml
+  rate_limits: rate-limits/yeeld-rate-limits.yml
+  lifecycle: lifecycle/yeeld-lifecycle.yml
+  conformance: conformance/yeeld-conformance.yml
+  sandbox: sandbox/yeeld-sandbox.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

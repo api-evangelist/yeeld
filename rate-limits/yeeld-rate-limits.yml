@@ -4,84 +4,53 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Yeeld
 providerId: yeeld
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+generated: '2026-08-28'
+method: searched
+modified: '2026-08-28'
+source: >-
+  All seven published pages of https://docs.theyeeld.com (crawled 2026-08-28),
+  https://theyeeld.com/products/surcharging-api,
+  plus live unauthenticated responses from https://api.theyeeld.com.
 tags:
   - Rate Limiting
   - Quotas
   - Throttling
-description: Machine-readable rate limit definitions for the Yeeld API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
+description: >-
+  Yeeld publishes no rate limits, no quotas and no throttling response headers anywhere on
+  its public surface. REPLACES the 2026-05-04 bulk-sweep scaffold, which asserted
+  free/professional/enterprise tiers at 10/100/1000 requests per minute and monthly quotas
+  of 1,000/100,000 — none of which Yeeld has ever published. An honest zero is the finding.
+limit_count: 0
+limits: []
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+  observed: false
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header appears on any unauthenticated
+    response from api.theyeeld.com. Only 404 envelopes are reachable without a key, so
+    absence here is a weak negative for the authenticated surface — it is recorded as
+    "not observed", not as "no limits exist".
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Yeeld
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Yeeld
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Yeeld
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Yeeld
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Yeeld
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  throttled: null
+  quotaExceeded: null
+  note: Exhaustion status code is not published.
+policies: []
+evidence:
+  - url: https://docs.theyeeld.com/integrations/merchant
+    status: 200
+    note: Full integration guide; no limits, quotas or backoff guidance.
+  - url: https://docs.theyeeld.com/integrations/platforms-and-marketplaces
+    status: 200
+    note: >-
+      Platform guide instructs a call per transaction and a re-call on payment-method
+      change, with no stated ceiling on call volume.
+  - url: https://api.theyeeld.com/
+    status: 404
+    note: No rate-limit headers on the response.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

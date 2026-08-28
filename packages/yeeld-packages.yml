@@ -1,0 +1,63 @@
+specification: API Commons Packages
+specificationVersion: '0.1'
+provider: Yeeld
+providerId: yeeld
+generated: '2026-08-28'
+method: searched
+source: >-
+  Registry searches on 2026-08-28 against registry.npmjs.org, pypi.org, rubygems.org,
+  crates.io, plus a review of docs.theyeeld.com (all seven published pages) and
+  theyeeld.com/products/* for any first-party client library or SDK.
+description: >-
+  Yeeld publishes no first-party client libraries in any public package registry.
+  The documented integration path is a direct server-to-server HTTPS call to the Yeeld
+  API, or the Yeeld Surcharging App installed from the Stripe App Marketplace (a Stripe
+  platform app, not a downloadable package). Recorded as a verified zero, not a gap.
+package_count: 0
+packages: []
+searches:
+  - registry: npm
+    query: yeeld
+    endpoint: https://registry.npmjs.org/-/v1/search?text=yeeld
+    status: 200
+    results: 0
+    version: null
+    published: null
+    note: Zero packages match. No @yeeld or theyeeld scope exists.
+  - registry: pypi
+    query: yeeld
+    endpoint: https://pypi.org/pypi/yeeld/json
+    status: 404
+    results: 0
+    version: null
+    published: null
+    note: No PyPI project under this name.
+  - registry: github
+    query: org:yeeld
+    endpoint: https://api.github.com/orgs/yeeld
+    status: 200
+    results: 0
+    version: null
+    published: null
+    note: >-
+      OWNERSHIP EXCLUSION — github.com/yeeld exists but belongs to a different company:
+      a French "Mobile saving account" business (blog yeeld.fr, location France, created
+      2018-02-06, 1 public repo). It is not this Yeeld (theyeeld.com, Chicago IL,
+      surcharging infrastructure), so nothing from that org is attributed here and no
+      GitHubOrganization pointer is emitted.
+distribution:
+  - name: Yeeld Surcharging App for Stripe
+    channel: Stripe App Marketplace
+    url: https://marketplace.stripe.com/apps/yeeld
+    status: 200
+    registry: none
+    version: null
+    published: null
+    official: true
+    note: >-
+      Installed inside a merchant's Stripe account rather than downloaded. Marketplace
+      listing renders client-side, so no version metadata is exposed to an anonymous
+      fetch; recorded as null rather than guessed.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

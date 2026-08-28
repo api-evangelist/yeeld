@@ -1,0 +1,166 @@
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: Yeeld
+providerId: yeeld
+generated: '2026-08-28'
+method: searched
+source: >-
+  https://docs.theyeeld.com/compliance/overview,
+  https://docs.theyeeld.com/getting-started/overview,
+  https://docs.theyeeld.com/yeeld-stripe-app/overview,
+  https://theyeeld.com/products/yeeld-pay,
+  https://theyeeld.com/products/surcharging-api
+description: >-
+  Standards and cross-cutting conformance assertions for Yeeld. Yeeld publishes no
+  machine-readable contract, so nothing here is derived from a spec — every entry cites a
+  public documentation page. Yeeld's market (US/Canada card surcharging) is governed by
+  card-network operating rules and state/provincial statute rather than by an interface
+  standard, so the domain-standard slot is honestly empty rather than filled.
+sector: Payments / Surcharging
+conformance:
+  - id: card-network-surcharging-rules
+    name: Visa / Mastercard / American Express / Discover surcharging rules
+    conforms: true
+    category: domain-rules
+    evidence:
+      url: https://docs.theyeeld.com/compliance/overview
+      status: 200
+      quote: >-
+        Card network rules - Visa, Mastercard, American Express, and Discover caps and
+        disclosure requirements.
+      note: >-
+        Enforcement is a product behaviour, not a certification. Yeeld states it applies the
+        strictest applicable rule with no override that bypasses a higher layer.
+  - id: us-state-canadian-provincial-surcharging-law
+    name: US state and Canadian provincial surcharging statute
+    conforms: true
+    category: regulatory
+    evidence:
+      url: https://docs.theyeeld.com/getting-started/overview
+      status: 200
+      quote: >-
+        Jurisdictional enforcement - Surcharging rules vary by U.S. state, Canadian province,
+        and card network, and they change often. Yeeld maintains the ruleset and applies it
+        automatically.
+      note: >-
+        Yeeld blocks surcharging where prohibited (returns a $0 surcharge) and names
+        California, New York and Mississippi as jurisdictions requiring counsel.
+  - id: mastercard-disclosure
+    name: Mastercard surcharge disclosure filing
+    conforms: true
+    category: domain-rules
+    evidence:
+      url: https://docs.theyeeld.com/integrations
+      status: 200
+      quote: >-
+        Each sub-merchant must have a completed Mastercard Disclosure on file, and you are
+        responsible for ensuring your software displays correct notices on their behalf.
+      note: Obligation is placed on the merchant/platform, not carried by Yeeld.
+  - id: pci-dss
+    name: PCI DSS
+    conforms: false
+    category: security
+    evidence:
+      url: https://theyeeld.com/products/yeeld-pay
+      status: 200
+      quote: >-
+        YeeldPay leverages Stripe Elements, so card data is tokenized in the customer's
+        browser and sent directly to Stripe's PCI DSS Level 1 infrastructure. No card data
+        on Yeeld's servers - nothing sensitive ever touches us.
+      note: >-
+        This is a SCOPE-REDUCTION claim, not a Yeeld certification. The PCI DSS Level 1
+        attestation cited belongs to Stripe. Yeeld publishes no AOC, ROC, SAQ level or
+        certification of its own, so this is recorded as false — the honest reading, since
+        crediting Yeeld with Stripe's certification is exactly the misattribution this
+        field exists to prevent.
+  - id: 3d-secure
+    name: 3-D Secure (EMV 3DS)
+    conforms: true
+    category: security
+    evidence:
+      url: https://theyeeld.com/products/yeeld-pay
+      status: 200
+      quote: >-
+        TLS-encrypted traffic end to end, with 3D Secure triggered automatically when required.
+      note: Delivered through the Stripe checkout surface that YeeldPay is built on.
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    category: interface
+    evidence:
+      url: https://api.theyeeld.com/
+      status: 404
+      note: >-
+        Live probe returns a vendor JSON envelope {message, error, statusCode}, not
+        application/problem+json.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    category: interface
+    evidence:
+      url: https://api.theyeeld.com/.well-known/oauth-authorization-server
+      status: 404
+      note: >-
+        No authorization-server or protected-resource metadata on any Yeeld host; docs
+        describe a plain API key plus a Yeeld-Account tenant header.
+  - id: openapi
+    name: OpenAPI
+    conforms: false
+    category: interface
+    evidence:
+      url: https://api.theyeeld.com/openapi.json
+      status: 404
+      note: >-
+        No OpenAPI, Swagger, GraphQL SDL, AsyncAPI, .proto or WSDL is served on
+        theyeeld.com, api.theyeeld.com or docs.theyeeld.com. See
+        well-known/yeeld-well-known.yml for the full probe list.
+  - id: idempotency
+    name: Idempotent write semantics
+    conforms: false
+    category: interface
+    evidence:
+      url: https://docs.theyeeld.com/integrations/merchant
+      status: 200
+      note: No idempotency key or replay policy is published.
+  - id: pagination
+    name: Documented pagination
+    conforms: false
+    category: interface
+    evidence:
+      url: https://docs.theyeeld.com/integrations
+      status: 200
+      note: No list surface is documented publicly.
+domain_standard:
+  present: false
+  candidates_checked:
+    - id: iso-20022
+      found: false
+      note: No ISO 20022 message type appears anywhere in Yeeld's public docs.
+    - id: x12-edi
+      found: false
+    - id: fdx
+      found: false
+      note: Yeeld is not an open-banking/data-sharing provider; FDX does not apply.
+    - id: psd2-obie
+      found: false
+      note: US/Canada card surcharging; no European open-banking surface.
+    - id: emv-3ds
+      found: true
+      note: >-
+        The one card-domain standard Yeeld names, and it is inherited from Stripe rather
+        than declared by a Yeeld contract — recorded above under 3-d-secure, not claimed as
+        a domain-standard signature in a spec Yeeld does not publish.
+  note: >-
+    REWARD-ONLY field left empty on purpose. A domain-standard signature must be readable
+    in the CONTRACT, and Yeeld publishes no contract to read it from. Card surcharging is
+    governed by network operating rules and statute, not by a machine-readable interface
+    standard, so no conformance was invented to fill the slot.
+certifications_published: []
+certifications_note: >-
+  probe-security-programs.py returned vdp=none trust=none on 2026-08-28 — no trust center,
+  no named SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP attestation, no bug bounty and no
+  security.txt. No Compliance pointer is emitted in apis.yml because there is no published
+  certification to point at.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

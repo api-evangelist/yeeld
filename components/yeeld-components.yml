@@ -1,0 +1,76 @@
+specification: API Commons Components
+specificationVersion: '0.1'
+provider: Yeeld
+providerId: yeeld
+generated: '2026-08-28'
+method: searched
+source: >-
+  https://theyeeld.com/products/yeeld-pay,
+  https://theyeeld.com/products/yeeld-surcharging-for-stripe,
+  https://docs.theyeeld.com/yeeld-stripe-app/overview,
+  https://marketplace.stripe.com/apps/yeeld
+description: >-
+  Client-side and prebuilt surfaces Yeeld ships alongside the API. Yeeld publishes no
+  element library, no web components and no loader script; what it ships is a hosted
+  checkout page and a Stripe platform app. Recorded at the level Yeeld actually documents —
+  no component names, props or script URLs were invented.
+families:
+  - id: yeeldpay
+    name: YeeldPay hosted checkout
+    kind: hosted-prebuilt
+    no_code: true
+    url: https://theyeeld.com/products/yeeld-pay
+    status: 200
+    host: https://pay.theyeeld.com
+    host_status: 404
+    host_note: >-
+      pay.theyeeld.com resolves and serves a Next.js app; the bare root returns a 404 shell
+      because checkout pages are per-merchant/per-link paths. No sample link is published.
+    capabilities:
+      - Branded hosted payment page (merchant logo, custom fields)
+      - Pay-by-link distribution via email or embedded on a website
+      - Automatic surcharge calculation with required disclosures
+      - Accepts surcharged cards and ACH
+      - Sync with invoicing tools, ERP, or Salesforce
+    built_on: >-
+      Stripe Elements — card data is tokenized in the shopper's browser and sent directly to
+      Stripe; funds settle to the merchant's own Stripe account.
+    signup: https://theyeeld.com/yeeld-pay-signup
+    signup_status: 200
+  - id: yeeld-stripe-app
+    name: Yeeld Surcharging App for Stripe
+    kind: platform-app
+    no_code: false
+    url: https://marketplace.stripe.com/apps/yeeld
+    status: 200
+    docs: https://docs.theyeeld.com/yeeld-stripe-app/overview
+    docs_status: 200
+    integration_effort: >-
+      "just add one line of code to enable surcharging" on an existing Stripe Checkout
+      Session or Payment Link. The exact line is not published.
+    supported_surfaces:
+      - product: Stripe Checkout Sessions API
+        note: Hosted, embedded, and custom Checkout flows.
+      - product: Stripe Payment Links API
+    unsupported_in_app:
+      - Stripe Payment Intents
+      - Stripe Terminal
+      - Stripe Connect
+    unsupported_note: >-
+      "Need surcharging with Payment Intents, Terminal, or Connect? These are supported
+      outside the Yeeld Stripe App. Contact support@theyeeld.com to get set up."
+    onboarding_steps:
+      - Install the Yeeld Surcharging App from the Stripe App Marketplace
+      - Configure locations, surcharge settings, receipts, disclosures, refund handling,
+        tax treatment and billing
+      - Add one line of code to Checkout, or create Payment Links via the API
+      - Go live; Yeeld calculates surcharges and disclosures on every transaction
+loader_libraries: []
+element_libraries: []
+embedded_dashboards: []
+note: >-
+  Distinct from packages/yeeld-packages.yml, which records that Yeeld ships no client
+  library in any public registry.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

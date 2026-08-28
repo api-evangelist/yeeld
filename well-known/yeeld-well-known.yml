@@ -1,0 +1,158 @@
+specification: API Commons Well-Known
+specificationVersion: '0.1'
+provider: Yeeld
+providerId: yeeld
+generated: '2026-08-28'
+method: probed
+source: >-
+  Direct unauthenticated HTTPS probes of every Yeeld host discovered in this pass
+  (apis.yml humanURL host plus the api./docs./pay./dashboard. subdomains resolved from DNS).
+description: >-
+  Probe record of IETF/OpenID/agent well-known discovery documents across Yeeld's hosts.
+  Every path was probed on 2026-08-28 and every path missed. theyeeld.com is a WordPress
+  site that answers unknown paths with a real 404 HTML page; docs.theyeeld.com and
+  pay.theyeeld.com are Next.js apps that answer 404 with an HTML shell;
+  api.theyeeld.com is a Fastify JSON API that answers 404 with a JSON envelope;
+  dashboard.theyeeld.com answers every path with a 307 redirect to authentication.
+  No document was served, so no WellKnown or SecurityTxt pointer is emitted in apis.yml.
+hosts:
+  - host: theyeeld.com
+    note: Marketing site (WordPress). Real 404s.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: api.theyeeld.com
+    note: >-
+      Live Fastify JSON API host (AWS ELB prod-shikaserviceloadbal, us-east-2). Returns
+      {"message":"Route GET:<path> not found","error":"Not Found","statusCode":404} for
+      every unauthenticated path, which confirms a real API server but publishes nothing.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: docs.theyeeld.com
+    note: Public documentation site (Next.js on CloudFront). HTML shell on 404.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: pay.theyeeld.com
+    note: YeeldPay hosted checkout (Next.js on CloudFront). HTML shell on 404.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: dashboard.theyeeld.com
+    note: >-
+      "Yeeld Systems" admin console (Next.js on Vercel). Every /.well-known/ path answers
+      307 to an authentication flow; nothing is served anonymously.
+    documents:
+      - path: /.well-known/security.txt
+        status: 307
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 307
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 307
+        file: null
+      - path: /.well-known/api-catalog
+        status: 307
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 307
+        file: null
+additional_probes:
+  - url: https://theyeeld.com/llms.txt
+    status: 404
+  - url: https://theyeeld.com/openapi.json
+    status: 404
+  - url: https://theyeeld.com/swagger.json
+    status: 404
+  - url: https://api.theyeeld.com/openapi.json
+    status: 404
+  - url: https://api.theyeeld.com/openapi.yaml
+    status: 404
+  - url: https://api.theyeeld.com/swagger.json
+    status: 404
+  - url: https://api.theyeeld.com/v1/openapi.json
+    status: 404
+  - url: https://api.theyeeld.com/api-docs
+    status: 404
+  - url: https://api.theyeeld.com/docs
+    status: 404
+  - url: https://api.theyeeld.com/graphql
+    status: 404
+  - url: https://api.theyeeld.com/mcp
+    status: 404
+  - url: https://docs.theyeeld.com/openapi.json
+    status: 404
+  - url: https://docs.theyeeld.com/llms.txt
+    status: 404
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

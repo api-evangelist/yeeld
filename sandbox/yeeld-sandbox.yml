@@ -1,0 +1,48 @@
+specification: API Commons Sandbox
+specificationVersion: '0.1'
+provider: Yeeld
+providerId: yeeld
+generated: '2026-08-28'
+method: searched
+source: https://theyeeld.com/products/surcharging-api (FAQ), https://docs.theyeeld.com
+description: >-
+  Yeeld states that a sandbox exists but does not publish it. The FAQ on the Surcharging
+  API page asks and answers the question directly, and the answer is a sales gate. Nothing
+  below is invented — there are no published test values to record, and none were authored.
+available: true
+public: false
+access: contact-required
+self_serve_signup: false
+evidence:
+  - url: https://theyeeld.com/products/surcharging-api
+    status: 200
+    quote: 'Is there a sandbox or API docs? Yes. Contact us to get access.'
+  - url: https://theyeeld.com/contact
+    status: 200
+    note: The contact form is the only published route to sandbox access.
+test_vs_live:
+  key_prefixes_published: false
+  mode_switch_published: false
+  note: >-
+    No test-mode key prefix, no live/test toggle, and no environment base URL are published.
+    api.theyeeld.com is the only Yeeld API host that resolves; no sandbox.* or
+    api-sandbox.* subdomain exists in DNS.
+test_values:
+  test_cards: []
+  test_accounts: []
+  test_tokens: []
+  note: >-
+    None published. NOT authored — inventing test card numbers or key prefixes for a
+    payments provider would be fabrication with real downstream cost.
+time_simulation:
+  test_clocks: false
+fixtures_and_triggers:
+  published: false
+adjacent:
+  note: >-
+    The Yeeld Surcharging App for Stripe is exercised through a merchant's own Stripe
+    account, where Stripe's test mode applies. That is Stripe's sandbox, not Yeeld's, and
+    is recorded here only to keep the two apart.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

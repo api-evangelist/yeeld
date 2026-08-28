@@ -1,0 +1,83 @@
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: Yeeld
+providerId: yeeld
+generated: '2026-08-28'
+method: searched
+source: >-
+  Full crawl of https://docs.theyeeld.com (2026-08-28), https://theyeeld.com/products/*,
+  https://theyeeld.com/legal/terms-of-use, plus DNS and HTTP probes for a status page and
+  a changelog.
+description: >-
+  Versioning, deprecation, SLA and status posture for Yeeld. Yeeld publishes none of these
+  artifacts. Recorded as a probed absence with the URLs and statuses that establish it —
+  no StatusPage or Deprecation pointer is emitted in apis.yml because there is nothing to
+  point at.
+versioning:
+  documented: false
+  scheme: unknown
+  version_in_path: false
+  version_header: null
+  note: >-
+    No version string appears in the public docs and no /v1 route answers anonymously on
+    api.theyeeld.com. Docs pages are stamped "Updated: April 2026" with an owning team
+    (Engineering / Compliance / Operations / Product) in place of an API version.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No deprecation policy, no notice period, and no RFC 8594 Sunset/Deprecation header
+    commitment. Yeeld does commit to keeping its RULESET current — "Rules are automatically
+    updated as regulations evolve, so the integration stays current" — which is content
+    lifecycle, not interface lifecycle, and is not counted as a deprecation policy.
+sla:
+  published: false
+  uptime_target: null
+  note: >-
+    No uptime or latency commitment is published, which is notable for an API that sits
+    synchronously in a checkout path.
+status_page:
+  published: false
+  probes:
+    - url: https://status.theyeeld.com/
+      status: '000'
+      note: No DNS record; connection could not be established.
+    - url: https://docs.theyeeld.com/
+      status: 200
+      note: No status link in the docs navigation or footer.
+changelog:
+  published: false
+  probes:
+    - url: https://docs.theyeeld.com/changelog
+      status: 404
+    - url: https://docs.theyeeld.com/rss.xml
+      status: 404
+      note: >-
+        The docs template links /rss.xml from every page but the route 404s — a dead
+        pointer in Yeeld's own documentation site, worth reporting back to them.
+  note: >-
+    The marketing blog at https://theyeeld.com/blog (RSS at /feed/, 200,
+    application/rss+xml) covers regulatory news, not API changes. Product/API changes are
+    not announced anywhere public.
+support:
+  email: support@theyeeld.com
+  contact_page: https://theyeeld.com/contact
+  contact_page_status: 200
+  note: Docs footer publishes support@theyeeld.com; the marketing site uses info@theyeeld.com.
+maturity:
+  stage: production
+  evidence:
+    - url: https://theyeeld.com/customers
+      status: 200
+      note: >-
+        Named customer references (Progress Residential, Atlas Travel & Technology Group,
+        Makua) with attributed titles.
+    - url: https://marketplace.stripe.com/apps/yeeld
+      status: 200
+      note: Listed app on the Stripe App Marketplace.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

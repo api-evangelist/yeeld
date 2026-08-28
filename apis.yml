@@ -1,48 +1,143 @@
 aid: yeeld
 name: Yeeld
 description: >-
-  Move faster with payment experts offering advisory and development services, along
-  with a Surcharging API to recover costs and ensure compliance.
+  Yeeld builds credit-card surcharging infrastructure for merchants and platforms across
+  the United States and Canada, and provides payments consulting and development services.
+  The Yeeld Surcharging API is a real-time rules engine: a caller passes a transaction
+  amount and payment-method details, and Yeeld returns the surcharge that jurisdictional
+  law and Visa, Mastercard, American Express and Discover rules permit, or zero where
+  surcharging is prohibited. Yeeld also ships a Stripe App Marketplace app for Stripe
+  Checkout and Payment Links, and YeeldPay, a no-code branded hosted checkout. Founded by
+  ex-Stripe staff and headquartered in Chicago, Illinois.
 type: Index
 accessModel:
-  pricing: freemium
-  onboarding: unknown
+  pricing: usage-based
+  onboarding: contact-sales
   trial: false
   try_now: false
   public: false
-  label: Freemium
-  confidence: medium
+  label: Contact Sales
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  - docs
+  generated: '2026-08-28'
+  method: searched
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/yeeld.png
-tags: []
+tags:
+  - Payments
+  - Surcharging
+  - Credit Cards
+  - Compliance
+  - Stripe
+  - Checkout
+  - Fintech
+  - Payment Consulting
 created: '2025-02-21'
-modified: '2026-03-16'
+modified: '2026-08-28'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/yeeld/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 common:
-  - type: DomainSecurity
-    url: security/yeeld-domain-security.yml
+  - type: Website
+    url: https://theyeeld.com/
+  - type: DeveloperPortal
+    url: https://docs.theyeeld.com/
+  - type: Documentation
+    url: https://docs.theyeeld.com/
+  - type: GettingStarted
+    url: https://docs.theyeeld.com/getting-started/overview
+  - type: Support
+    url: https://theyeeld.com/contact
+  - type: Pricing
+    url: https://theyeeld.com/products/yeeld-surcharging-for-stripe
+  - type: SignUp
+    url: https://theyeeld.com/yeeld-pay-signup
+  - type: TermsOfService
+    url: https://theyeeld.com/legal/terms-of-use
+  - type: PrivacyPolicy
+    url: https://theyeeld.com/legal/privacy-policy
+  - type: Blog
+    url: https://theyeeld.com/blog
+  - type: BlogRSS
+    url: https://theyeeld.com/feed/
   - type: LinkedIn
     url: https://www.linkedin.com/company/theyeeld
-  - url: https://theyeeld.com/feed/
-    type: Blog
+  - type: DomainSecurity
+    url: security/yeeld-domain-security.yml
+  - type: LLMsTxt
+    url: llms/yeeld-llms.txt
+  - type: Packages
+    url: packages/yeeld-packages.yml
+  - type: Components
+    url: components/yeeld-components.yml
 apis:
   - aid: yeeld:yeeld
-    name: Yeeld
+    name: Yeeld Surcharging API
     description: >-
-      Move faster with payment experts offering advisory and development services,
-      along with a Surcharging API to recover costs and ensure compliance.
-    humanURL: ' https://theyeeld.com/'
-    tags: []
+      Real-time surcharge calculation API. The caller sends a base transaction amount and
+      payment-method details (card brand and type) and receives the permitted surcharge
+      amount, evaluated against U.S. state and Canadian provincial statute, card-network
+      caps, and the merchant's own configuration. Platforms pass a Yeeld-Account header to
+      scope the calculation to a sub-merchant. Yeeld does not process payments or store
+      card data. The endpoint reference and sandbox are gated behind a contact-sales form.
+    humanURL: https://docs.theyeeld.com/integrations
+    baseURL: https://api.theyeeld.com
+    tags:
+      - Payments
+      - Surcharging
+      - Compliance
     properties:
       - type: Documentation
-        url: ' https://theyeeld.com/'
+        url: https://docs.theyeeld.com/
+      - type: Authentication
+        url: authentication/yeeld-authentication.yml
+      - type: Conventions
+        url: conventions/yeeld-conventions.yml
+      - type: RateLimits
+        url: rate-limits/yeeld-rate-limits.yml
+      - type: Plans
+        url: plans/yeeld-plans-pricing.yml
+      - type: Sandbox
+        url: sandbox/yeeld-sandbox.yml
+      - type: Lifecycle
+        url: lifecycle/yeeld-lifecycle.yml
+      - type: Conformance
+        url: conformance/yeeld-conformance.yml
+      - type: FinOps
+        url: finops/yeeld-finops.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-28'
+  status: enriched
+  artifacts_added: 9
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: none
+  detail: >-
+    STEP 0b contract discovery beat the prior round's read of this company. Two hosts the
+    profile never carried resolve and answer: docs.theyeeld.com serves seven server-rendered,
+    crawlable documentation pages (integration models, merchant and platform guides,
+    compliance rules), and api.theyeeld.com is a live first-party Fastify JSON API on Yeeld's
+    own AWS load balancer. What remains gated is narrower than "no API": Yeeld's own FAQ on
+    theyeeld.com/products/surcharging-api answers "Is there a sandbox or API docs? Yes.
+    Contact us to get access.", so the endpoint reference, request/response schemas and
+    sandbox sit behind a contact-sales form while the integration semantics, auth model
+    (API key plus a Yeeld-Account tenant header) and compliance rules are public.
+  evidence:
+    - url: https://docs.theyeeld.com/integrations
+      status: 200
+    - url: https://api.theyeeld.com/
+      status: 404
+    - url: https://theyeeld.com/products/surcharging-api
+      status: 200
+    - url: https://api.theyeeld.com/openapi.json
+      status: 404
+    - url: https://theyeeld.com/llms.txt
+      status: 404
+  checked: '2026-08-28'
