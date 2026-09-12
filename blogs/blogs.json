@@ -2,13 +2,11 @@
   "repo": "yeeld",
   "feeds": [
     {
-      "source": "https://theyeeld.com/feed/",
-      "feed_url": "https://theyeeld.com/feed/",
+      "source": "https://theyeeld.com/blog",
+      "feed_url": "https://theyeeld.com/blog/feed/",
       "title": "",
       "saved": 0,
-      "method": "feed",
-      "nature": "undetermined",
-      "nature_basis": null
+      "method": "discovered"
     },
     {
       "source": "https://theyeeld.com/legal/privacy-policy",
@@ -18,14 +16,28 @@
       "method": "discovered"
     },
     {
-      "source": "https://theyeeld.com/blog",
+      "source": "https://theyeeld.com/legal/privacy-policy/blog/feed/",
+      "feed_url": "https://theyeeld.com/legal/privacy-policy/blog/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://theyeeld.com/blog/feed/",
       "feed_url": "https://theyeeld.com/blog/feed/",
       "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "feed"
+    },
+    {
+      "source": "https://theyeeld.com/feed/",
+      "feed_url": "https://theyeeld.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     }
   ],
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "post_count": 15,
   "feed_nature": "undetermined",
   "feed_nature_basis": null,
