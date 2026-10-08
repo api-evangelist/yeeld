@@ -52,6 +52,12 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/yeeld/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 common:
+  - type: Plans
+    url: plans/yeeld-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/yeeld-rate-limits.yml
+  - type: FinOps
+    url: finops/yeeld-finops.yml
   - type: Website
     url: https://theyeeld.com/
   - type: DeveloperPortal
