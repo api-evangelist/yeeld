@@ -1,9 +1,19 @@
-generated: '2026-10-15'
+generated: '2026-10-20'
 method: searched
-checked:
-- stripe/integrations/stripe-integration-edges.yml
 source:
 - stripe/integrations/stripe-integration-edges.yml
+- https://zapier.com/apps/yeeld/integrations
+- https://n8n.io/integrations/yeeld/
+- https://composio.dev/toolkits/yeeld
+- https://monid.ai/tools/yeeld
+checked:
+- stripe/integrations/stripe-integration-edges.yml
+- https://composio.dev/toolkits/yeeld
+- https://monid.ai/tools/yeeld
+- https://n8n.io/integrations/yeeld/
+- https://zapier.com/apps/yeeld/integrations
+summary: null
+marketplace_apps: []
 edges:
 - partner_name: Stripe (own)
   partner: stripe
@@ -22,3 +32,4 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: compliance
+templates: []
