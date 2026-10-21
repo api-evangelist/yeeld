@@ -12,6 +12,13 @@ checked:
 - https://monid.ai/tools/yeeld
 - https://n8n.io/integrations/yeeld/
 - https://zapier.com/apps/yeeld/integrations
+- https://docs.stripe.com/stripe-apps
+- https://docs.stripe.com/stripe-apps/review-requirements
+- https://marketplace.stripe.com/
+- https://marketplace.stripe.com/appm/apps
+- https://stripe.com/partners/directory
+- https://stripe.com/partners/verified-partners
+- https://stripe.partners/sitemap.xml
 summary: null
 marketplace_apps: []
 edges:
@@ -32,4 +39,53 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: compliance
+- partner_name: Stripe Partner Ecosystem
+  partner: stripe
+  partner_match: register
+  type: register
+  direction: partner-built
+  channel: standard-directory
+  relationship: standard-participant
+  evidence: https://stripe.partners/directory/theyeeld
+  category: Stripe ecosystem partner
+  contract_reference:
+    register: Stripe Partner Ecosystem directory (stripe.com/partners/directory -> stripe.partners, PartnerPage
+      SSR __NUXT_DATA__)
+    standard: Stripe Partner Ecosystem
+    spec_file: null
+    role: stripe-verified-partner
+    registered_name: Yeeld
+    register_id: theyeeld
+    partner_tier:
+    - Premier Services Partner
+    matched_domain: theyeeld.com
+    matched_by: domain
+    identity_source: the directory's own website field for the partner (no lookup)
+    signal_note: 'participation only: directory listing (verification tier, if any, in partner_tier)'
+    context:
+      callouts:
+      - Specialized partner
+      - Ecommerce
+      stripe_products:
+      - Billing
+      - Connect
+      - Identity
+      - Invoicing
+      - Radar
+      - Sigma
+      - Tax
+      - Terminal
+      - Stripe Data Pipeline
+      - Instant Payouts
+      - Issuing
+      - Link
+      - Treasury
+      certified_people:
+      - title: Stripe Certified Professional Developers
+        people: 5
+      location: Chicago, United States
+    detected_by: sweep-stripe-app-marketplace.py
+    detected: '2026-10-21'
+  detected_by: sweep-stripe-app-marketplace.py
+  first_seen: '2026-10-21'
 templates: []

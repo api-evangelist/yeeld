@@ -16,3 +16,53 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: yeeld-stripe-partner-ecosystem
+  label: Stripe Partner Ecosystem
+  partner: stripe
+  partner_name: Stripe Partner Ecosystem
+  category: Stripe ecosystem partner
+  type: register
+  channel: standard-directory
+  evidence: https://stripe.partners/directory/theyeeld
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Stripe Partner Ecosystem directory (stripe.com/partners/directory -> stripe.partners, PartnerPage
+      SSR __NUXT_DATA__)
+    standard: Stripe Partner Ecosystem
+    spec_file: null
+    role: stripe-verified-partner
+    registered_name: Yeeld
+    register_id: theyeeld
+    partner_tier:
+    - Premier Services Partner
+    matched_domain: theyeeld.com
+    matched_by: domain
+    identity_source: the directory's own website field for the partner (no lookup)
+    signal_note: 'participation only: directory listing (verification tier, if any, in partner_tier)'
+    context:
+      callouts:
+      - Specialized partner
+      - Ecommerce
+      stripe_products:
+      - Billing
+      - Connect
+      - Identity
+      - Invoicing
+      - Radar
+      - Sigma
+      - Tax
+      - Terminal
+      - Stripe Data Pipeline
+      - Instant Payouts
+      - Issuing
+      - Link
+      - Treasury
+      certified_people:
+      - title: Stripe Certified Professional Developers
+        people: 5
+      location: Chicago, United States
+    detected_by: sweep-stripe-app-marketplace.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
