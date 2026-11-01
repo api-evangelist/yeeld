@@ -1,4 +1,4 @@
-# Yeeld (yeeld)
+# Yeeld
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,43 +64,110 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Move faster with payment experts offering advisory and development services, along with a Surcharging API to recover costs and ensure compliance 
+Yeeld builds credit-card surcharging infrastructure for merchants and platforms across the United States and Canada, and provides payments consulting and development services. The Yeeld Surcharging API is a real-time rules engine: a caller passes a transaction amount and payment-method details, and Yeeld returns the surcharge that jurisdictional law and Visa, Mastercard, American Express and Discover rules permit, or zero where surcharging is prohibited. Yeeld also ships a Stripe App Marketplace app for Stripe Checkout and Payment Links, and YeeldPay, a no-code branded hosted checkout. Founded by ex-Stripe staff and headquartered in Chicago, Illinois.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/yeeld/refs/heads/main/apis.yml)
+**Areas:** Payments · Surcharging · Credit Cards · Compliance · Stripe · Checkout · Fintech · Payment Consulting
 
-## Scope
+## Yeeld on APIs.io
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+Everything profiled for Yeeld is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/yeeld/](https://apis.io/providers/yeeld/)** — or go straight to one of the APIs or properties below.
 
-## Tags:
+### APIs (1)
 
- - API
+- [Yeeld Surcharging API](https://apis.io/apis/yeeld/yeeld/) — Real-time surcharge calculation API. The caller sends a base transaction amount and payment-method details (card brand and type) and receives the permitted…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-02-21 
-- **Modified:** 2026-03-16 
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Security (2)
 
-### Yeeld
-Move faster with payment experts offering advisory and development services, along with a Surcharging API to recover costs and ensure compliance 
+Authentication, trust centre, and vulnerability disclosure.
 
-**Human URL:** [ https://theyeeld.com/]( https://theyeeld.com/)
+- [Yeeld Authentication](https://apis.io/security/yeeld/yeeld-authentication/)
+- [Yeeld Domain Security](https://apis.io/security/yeeld/yeeld-domain-security/)
 
+#### Plans and pricing (1)
 
-#### Tags:
+Published plans, tiers and prices.
 
- - API
+- [Yeeld Plans Pricing](https://apis.io/plans/yeeld/yeeld-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation]( https://theyeeld.com/)
+Published request limits.
 
-## Maintainers
+- [Yeeld Rate Limits](https://apis.io/rate-limits/yeeld/yeeld-rate-limits/)
 
-**FN:** Kin Lane
+#### FinOps (1)
 
-**Email:** kin@apievangelist.com
+What the API costs to run, by operation.
+
+- [Yeeld Finops](https://apis.io/finops/yeeld/yeeld-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://theyeeld.com/)
+- [Documentation](https://docs.theyeeld.com/)
+- [Getting started](https://docs.theyeeld.com/getting-started/overview)
+- [Pricing](https://theyeeld.com/products/yeeld-surcharging-for-stripe)
+- [Sign up](https://theyeeld.com/yeeld-pay-signup)
+- [Support](https://theyeeld.com/contact)
+- [Blog](https://theyeeld.com/blog)
+- [Terms of service](https://theyeeld.com/legal/terms-of-use)
+- [Privacy policy](https://theyeeld.com/legal/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 30.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 57.1 |
+| Access clarity | 44.7 |
+
+**Agent readiness 5.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/yeeld/](https://apis.io/providers/yeeld/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Yeeld: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/yeeld/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
